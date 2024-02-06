@@ -77,6 +77,19 @@ def userdata(user_id):
 # # # # # # # # # funcion 3: UserForGenre # # # # # # # # #
 
 def UserForGenre(genero: str):
+    '''
+    Esta función obtiene información del usuario que más horas ha dedicado a un género específico,
+    junto con su historial de horas jugadas por año de lanzamiento.         
+    
+    Parámetros:
+        genero (str): Género del videojuego.
+    
+    Retorna:
+        dict: Un diccionario con la información del usuario y su historial:
+            - 'Usuario' (str): ID del usuario.
+            - 'Historial' (list): Una lista con el historial de horas jugadas por año de lanzamiento:
+                'En el año X jugó Y horas': Una frase que describe la cantidad de horas jugadas por el usuario en un año específico.
+    '''
     genero = genero.capitalize()
 
     # Cargar el archivo
@@ -85,8 +98,11 @@ def UserForGenre(genero: str):
     # Filtrar por genero
     df_user_genre = df_user_genre.loc[df_user_genre['genres'].apply(lambda x: genero in x), :]
 
+    # Tomar una muestra aleatoria del 10% del conjunto de datos
+    df_muestra = df_user_genre.sample(frac=0.1, random_state=42)
+
     # Calcular la suma por usuario
-    suma_por_años = df_user_genre.groupby(['user_id'])['playtime_forever'].sum().reset_index()
+    suma_por_años = df_muestra.groupby(['user_id'])['playtime_forever'].sum().reset_index()
 
     # Obtener el usuario con más horas
     user_con_mas_horas = suma_por_años.max().iloc[0]
