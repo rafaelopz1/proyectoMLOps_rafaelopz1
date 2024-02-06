@@ -92,8 +92,8 @@ def UserForGenre(genero: str):
     df_games_genres = pd.read_parquet('./data/df_games_genres.parquet')
     df_users_horas = pd.read_parquet('./data/df_users_horas.parquet')
 
-    df_games_genres = df_games_genres.sample(frac=0.15, random_state=42)
-    df_users_horas = df_users_horas.sample(frac=0.15, random_state=42)
+    df_games_genres = df_games_genres.sample(frac=0.1, random_state=42)
+    df_users_horas = df_users_horas.sample(frac=0.1, random_state=42)
 
     # Une ambos dataframes
     df_genres_horas = df_games_genres.merge(df_users_horas, on='item_id', how='right')
@@ -115,8 +115,8 @@ def UserForGenre(genero: str):
 
     # Construir el diccionario de resultados
     result_dict = {
-        "Usuario con más horas jugadas para Género X": max_user,
-        "Horas jugadas": [{"año_lanzamiento": int(year), "Horas": int(hours)} for year, hours in horas_por_anio.reset_index().to_dict(orient='split')['data']]
+        f"Usuario con más horas jugadas para Género {genero}": max_user,
+        "Horas jugadas": [{"Año": int(year), "Horas": int(hours)} for year, hours in horas_por_anio.reset_index().to_dict(orient='split')['data']]
     }
 
     return result_dict
