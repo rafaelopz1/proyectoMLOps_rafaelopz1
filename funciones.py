@@ -90,34 +90,23 @@ def UserForGenre( genero : str ):
             - 'Historial' (list): Una lista con el historial de horas jugadas por año de lanzamiento:
                 'En el año X jugó Y horas': Una frase que describe la cantidad de horas jugadas por el usuario en un año específico.
     '''
+    # Verificar si la columna existe en el DataFrame
     genero = genero.capitalize()
 
-    # Cargar el archivo
-    df_user_genre = pd.read_parquet('./data/ultimapruebagenre.parquet')
-
-     # Filtrar por genero
-    df_user_genre = df_user_genre.loc[df_user_genre['genres'].apply(lambda x: genero in x), :]
-
-     # Calcular la suma por usuario
-    suma_por_años = df_user_genre.groupby(['user_id'])['playtime_forever'].sum().reset_index()
-
-    # Obtener el usuario con más horas
-    user_con_mas_horas = suma_por_años.max().iloc[0]
-
-    # Calcular el historial de horas jugadas
-    df_historial = df_user_genre[df_user_genre['user_id'] == user_con_mas_horas]
-    suma_por_años = df_historial.groupby(['año_lanzamiento'])['playtime_forever'].sum().reset_index()
-
-     # Generar el resultado
-    historial = [f"En el año {año} jugó {horas} horas\n" for año, horas in suma_por_años.values]
-
-    resultados = {
-        'Usuario': user_con_mas_horas,
-        'Historial': historial
-        }
+    df_datos = pd.read_csv('./data/userforgenre_clean.csv')
     
-    return resultados
+    if genero in df_datos.columns:
+        # Extraer el contenido de la columna como una lista
+        #contenido = list(df_datos[genero])
 
+        # Crear el diccionario con los resultados
+        resultado = {
+            'Usuario': df_datos[genero].iloc[0],
+            'Historial': df_datos[genero].iloc[1]
+        }
+        return resultado
+    else:
+        print(f"La columna '{genero}' no existe en el DataFrame.")
 
 # # # # # # # # # funcion 4: best_developer_year # # # # # # # # #
 

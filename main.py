@@ -32,7 +32,7 @@ async def user(user_id: str):
         return {"error": str(e)} 
 
 
-@app.get('/userforgenre/{genero}', response_model=dict)
+@app.get('/userforgenre/{genero}')
 async def genre(genero: str):
     try:
         resultado = funciones.UserForGenre(genero)
