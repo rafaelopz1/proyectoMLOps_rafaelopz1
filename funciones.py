@@ -76,50 +76,47 @@ def userdata(user_id):
 
 # # # # # # # # # funcion 3: UserForGenre # # # # # # # # #
 
-def UserForGenre(genero: str):
+def UserForGenre( genero : str ):
     '''
-    Devuelve información sobre actividad en el mercado de un desarrollador de videojuegos.
-         
+    Esta función obtiene información del usuario que más horas ha dedicado a un género específico,
+    junto con su historial de horas jugadas por año de lanzamiento.         
+    
     Parámetros:
-        desarrollador (str): El nombre del desarrollador de videojuegos.
+        genero (str): Género del videojuego.
     
     Retorna:
-        dict: Un diccionario con las siguientes claves:
-            - 'Año' (dict): Año de lanzamiento solicitado.
-            - 'Cantidad de Items' (dict): Cantidad de juegos lanzados ese año según desarrollador.
-            - 'Contenido Free' (dict): Porcentaje de juegos gratuitos ese año según desarrollador.
+        dict: Un diccionario con la información del usuario y su historial:
+            - 'Usuario' (str): ID del usuario.
+            - 'Historial' (list): Una lista con el historial de horas jugadas por año de lanzamiento:
+                'En el año X jugó Y horas': Una frase que describe la cantidad de horas jugadas por el usuario en un año específico.
     '''
-    df_games_genres = pd.read_parquet('./data/df_games_genres.parquet')
-    df_users_horas = pd.read_parquet('./data/df_users_horas.parquet')
+    genero = genero.capitalize()
 
-    df_games_genres = df_games_genres.sample(frac=0.1, random_state=42)
-    df_users_horas = df_users_horas.sample(frac=0.1, random_state=42)
+    # Cargar el archivo
+    df_user_genre = pd.read_parquet('./data/ultimapruebagenre.parquet')
 
-    # Une ambos dataframes
-    df_genres_horas = df_games_genres.merge(df_users_horas, on='item_id', how='right')
+     # Filtrar por genero
+    df_user_genre = df_user_genre.loc[df_user_genre['genres'].apply(lambda x: genero in x), :]
 
-    # Filtra el DataFrame resultante para obtener solo las filas relacionadas con el género dado
-    df_filtered = df_genres_horas[df_genres_horas['genres'] == genero]
+     # Calcular la suma por usuario
+    suma_por_años = df_user_genre.groupby(['user_id'])['playtime_forever'].sum().reset_index()
 
-    if df_filtered.empty:
-        return {"message": "No data found for the given genre"}
+    # Obtener el usuario con más horas
+    user_con_mas_horas = suma_por_años.max().iloc[0]
 
-    # Encontrar el usuario que acumula más horas jugadas para el género dado
-    max_user = df_filtered.groupby('user_id')['playtime_forever'].sum().idxmax()
+    # Calcular el historial de horas jugadas
+    df_historial = df_user_genre[df_user_genre['user_id'] == user_con_mas_horas]
+    suma_por_años = df_historial.groupby(['año_lanzamiento'])['playtime_forever'].sum().reset_index()
 
-    # Filtrar el DataFrame para obtener solo las filas relacionadas con el usuario que acumula más horas
-    df_user_max_hours = df_filtered[df_filtered['user_id'] == max_user]
+     # Generar el resultado
+    historial = [f"En el año {año} jugó {horas} horas\n" for año, horas in suma_por_años.values]
 
-    # Agrupar por año y sumar las horas jugadas
-    horas_por_anio = df_user_max_hours.groupby('año_lanzamiento')['playtime_forever'].sum()
-
-    # Construir el diccionario de resultados
-    result_dict = {
-        "Usuario con más horas jugadas para Género X": max_user,
-        "Horas jugadas": [{"Año": int(year), "Horas": int(hours)} for year, hours in horas_por_anio.reset_index().to_dict(orient='split')['data']]
-    }
-
-    return result_dict
+    resultados = {
+        'Usuario': user_con_mas_horas,
+        'Historial': historial
+        }
+    
+    return resultados
 
 
 # # # # # # # # # funcion 4: best_developer_year # # # # # # # # #
