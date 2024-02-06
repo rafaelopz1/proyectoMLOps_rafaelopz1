@@ -33,7 +33,7 @@ async def user(user_id: str):
 
 
 @app.get('/userforgenre/{genero}')
-async def genre(genero: str):
+def genre(genero: str):
     try:
         resultado = funciones.UserForGenre(genero)
         return resultado
