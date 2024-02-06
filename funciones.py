@@ -93,7 +93,7 @@ def UserForGenre(genero: str):
     genero = genero.capitalize()
 
     # Cargar el archivo
-    df_user_genre = pd.read_parquet('./data/userforgenre.parquet')
+    df_user_genre = pd.read_parquet('./data/userforgenre1.parquet')
 
     # Filtrar por genero
     df_user_genre = df_user_genre.loc[df_user_genre['genres'].apply(lambda x: genero in x), :]
