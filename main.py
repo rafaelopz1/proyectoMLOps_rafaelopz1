@@ -7,7 +7,10 @@ app = FastAPI()
 
 @app.get('/')
 async def root():
-    return {'message': 'Proyecto individual MLOps - Rafael Oropeza. github @rafaelopz1'}
+    return {'Proyecto individual MLOps - Rafael Oropeza. github @rafaelopz1\n',
+            'Escriba /docs en la URL actual para interactuar con la API\n',
+            
+            'Ejemplo: https://proyectomlops-rafaelopz1.onrender.com/docs'}
 
 @app.get('/developer/{desarrollador}')
 async def desarrollador(desarrollador: str):
@@ -29,7 +32,7 @@ async def user(user_id: str):
         return {"error": str(e)} 
 
 
-@app.get('/userforgenre/{genero}')
+@app.get('/userforgenre/{genero}', response_model=dict)
 async def genre(genero: str):
     try:
         resultado = funciones.UserForGenre(genero)
