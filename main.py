@@ -7,10 +7,7 @@ app = FastAPI()
 
 @app.get('/')
 async def root():
-    return {'Proyecto individual MLOps - Rafael Oropeza. github @rafaelopz1\n',
-            'Escriba /docs en la URL actual para interactuar con la API\n',
-            
-            'Ejemplo: https://proyectomlops-rafaelopz1.onrender.com/docs'}
+    return {'Proyecto individual MLOps - Rafael Oropeza. github @rafaelopz1}
 
 @app.get('/developer/{desarrollador}')
 async def desarrollador(desarrollador: str):
@@ -30,17 +27,7 @@ async def user(user_id: str):
     
     except Exception as e:
         return {"error": str(e)} 
-
-'''
-@app.get('/userforgenre/{genero}')
-async def genre(genero: str):
-    try:
-        resultado = funciones.UserForGenre(genero)
-        return resultado
-    
-    except Exception as e:
-        return {"error": str(e)}   
-'''
+        
 
 @app.get('/best_developer_year/{año}')
 async def Best_developer_year(year: str):
