@@ -75,7 +75,7 @@ def userdata(user_id):
 
 
 # # # # # # # # # funcion 3: UserForGenre # # # # # # # # #
-"""
+
 def UserForGenre( genero : str ):
     genero = genero.capitalize()
 
@@ -104,7 +104,7 @@ def UserForGenre( genero : str ):
         }
     
     return resultados
-"""
+
 
 # # # # # # # # # funcion 4: best_developer_year # # # # # # # # #
 

@@ -40,7 +40,7 @@ async def genre(genero: str):
     
     except Exception as e:
         return {"error": str(e)}   
-    
+
 
 @app.get('/best_developer_year/{año}')
 async def Best_developer_year(year: str):

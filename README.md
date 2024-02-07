@@ -15,8 +15,6 @@ Sin duda alguna, este proyecto desafía a adquirir habilidades y conocimientos e
 
 ## **Etapas y tareas desarrolladas**
 
-
-
 1. **Limpieza y Transformación de Datos:** Para este proyecto se proporcionaron tres archivos en formato JSON, los cuales estan disponibles en esta carpeta de [Google Drive](https://drive.google.com/drive/folders/1HqBG2-sUkz_R3h1dZU5F2uAzpRn7BSpj). También contiene el [Diccionario](https://docs.google.com/spreadsheets/d/1-t9HLzLHIGXvliq56UE_gMaWBVTPfrlTf2D9uAtLGrk/edit#gid=0) de datos con algunas de las columnas disponibles en el dataset.
 
     - Se exploraron los datos disponibles para comprender su estructura y calidad. 
@@ -34,9 +32,9 @@ Puede revisar todo este proceso a detalle en el notebook [ETL](ETL.ipynb).
 
 3. **Feature engineering:** se creó una nueva columna llamada 'sentiment_analysis' que reemplaza a la columna que contiene los reviews donde clasifica los sentimientos de los comentarios con la siguiente escala: '0' si es malo, '1' si es neutral y '2' si es positivo.
 
-4. **Análisis Exploratorio de Datos:** Utilizamos el Análisis Exploratorio de Datos (EDA) como nuestra herramienta clave para comprender las relaciones entre variables y detectar posibles patrones e irregularidades.
+4. **Análisis Exploratorio de Datos:** Utilizamos el Análisis Exploratorio de Datos [(EDA)](EDA.ipynb) como nuestra herramienta clave para comprender las relaciones entre variables y detectar posibles patrones e irregularidades.
 
-5. **Desarrollo del Modelo de Recomendación:** Utilizando similitud del coseno y CountVectorizer, desarrollé un modelo que recomienda juegos similares en base a un juego dado. 
+5. **Desarrollo del Modelo de Recomendación:** Utilizando similitud del coseno y CountVectorizer, desarrollé un [modelo](modelo-recomendacion.ipynb) que recomienda juegos similares en base a un juego dado. 
 
     - Vectorización de descripciones: Con CountVectorizer, las descripciones de los juegos (columna 'specs') se convierten en vectores numéricos.
     
@@ -60,8 +58,13 @@ Proponemos disponibilizar los datos de la empresa utilizando el framework FastAP
 
 Se desplegó la API con Render para poder ser consumida desde la web.
 
-Puedes acceder al servicio en el siguiente link: https://proyectomlops-rafaelopz1.onrender.com
+Puedes acceder al servicio en el siguiente link: https://proyectomlops-rafaelopz1.onrender.com/docs
 
 ## Video
 
-En este video-LINK VIDEO- se explica brevemente este proyecto mostrando el funcionamiento de la API.
+En este [video](https://youtu.be/vjse1SPxShs)se explica brevemente este proyecto mostrando el funcionamiento de la API.
+
+## Autor
+Rafael Oropeza
+[LinkedIn](https://www.linkedin.com/in/rafael-oropeza-594853151/)
+rafael415oropeza@gmail.com
