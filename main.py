@@ -21,7 +21,7 @@ async def desarrollador(desarrollador: str):
     except Exception as e:
         return {"error": str(e)} 
 
-    
+
 @app.get('/userdata/{user_id}')
 async def user(user_id: str):
     try:
@@ -31,7 +31,7 @@ async def user(user_id: str):
     except Exception as e:
         return {"error": str(e)} 
 
-
+'''
 @app.get('/userforgenre/{genero}')
 async def genre(genero: str):
     try:
@@ -40,7 +40,7 @@ async def genre(genero: str):
     
     except Exception as e:
         return {"error": str(e)}   
-
+'''
 
 @app.get('/best_developer_year/{año}')
 async def Best_developer_year(year: str):
