@@ -66,5 +66,5 @@ En este [video](https://youtu.be/vjse1SPxShs)se explica brevemente este proyecto
 
 ## Autor
 Rafael Oropeza
-[LinkedIn](https://www.linkedin.com/in/rafael-oropeza-594853151/)
+[Linkedin](https://www.linkedin.com/in/rafael-oropeza-594853151/)
 rafael415oropeza@gmail.com

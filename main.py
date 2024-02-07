@@ -1,5 +1,5 @@
 # Importaciones necesarias
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 import funciones
 
 # Se instancia la aplicación
