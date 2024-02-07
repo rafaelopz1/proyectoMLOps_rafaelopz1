@@ -7,7 +7,7 @@ app = FastAPI()
 
 @app.get('/')
 async def root():
-    return {'Proyecto individual MLOps - Rafael Oropeza. github @rafaelopz1}
+    return {'message':'Proyecto individual MLOps - Rafael Oropeza. github @rafaelopz1'}
 
 @app.get('/developer/{desarrollador}')
 async def desarrollador(desarrollador: str):
